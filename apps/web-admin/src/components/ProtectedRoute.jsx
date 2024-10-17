@@ -33,8 +33,11 @@ export const ProtectedRoute = ({ children }) => {
   async function postOrg() {
     const id = user.sub.substring(6);
     const name = user.nickname;
-    const { data, mystatus } = await post(`/core/organizations`, {}, { id, name });
-    console.log('created');
+    const expected = await post(`/core/organizations`, {}, { id, name });
+    if(expected){
+      const { data, mystatus } = expected;
+       console.log('created');
+       console.log("status");
     if (mystatus === 200) {
       showAlert({
         title: 'Success',
@@ -42,11 +45,15 @@ export const ProtectedRoute = ({ children }) => {
         status: 'success',
       });
     }
+    }
+    
+   
   }
   async function checkOrg() {
     const response = await get('/core/users/mycreds');
+    console.log(response);  
     // console.log(response.data.data);
-    if (response.status === 200) {
+    if (response && response.status === 200) {
       setAccountDetails((preValue) => {
         return {
           ...preValue,

@@ -11,10 +11,15 @@ const MyContext = ({ children }) => {
   useEffect(() => {
     const fetchAccountDetails = async () => {
       if (isAuthenticated) {
-        const { data, status } = await get('/core/users/me');
+        const expected = await get('/core/users/me');
+        if(expected){
+          const { data, status } = expected;
+          setAccountDetails((preValue) => ({ ...preValue, ...(data.accountDetails || {}) }));
+        }
+        //const { data, status } = await get('/core/users/me');
         const response = await get('/core/users/mycreds');
         // console.log(response, data);
-        setAccountDetails((preValue) => ({ ...preValue, ...(data.accountDetails || {}) }));
+       
       }
     };
     fetchAccountDetails();

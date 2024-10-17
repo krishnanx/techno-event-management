@@ -30,23 +30,28 @@ export default function OrganizationById() {
   useMemo(async () => {
     // const fetchOrganizationStats = async () => {
     if (orgId !== undefined && accountDetails?.name === undefined) {
-      const { data, status } = await get(`/core/organizations/${orgId}`);
+      const expected = await get(`/core/organizations/${orgId}`);
+      if(expected){
+        const { data, status } = expected;
+        if (status === 200) {
+          setAccountDetails((preValue) => ({
+            ...preValue,
+            name: data.organization.name || '',
+            nEvents: data.organization.numberOfEvents || 0,
+            nMembers: data.organization.numberOfMembers || 0,
+          }));
+        } else {
+          showAlert({
+            title: 'Error',
+            description: data.error,
+            status: 'error',
+          });
+        }
+      }
+     
       // console.log(data);
       // console.log('hihihi')
-      if (status === 200) {
-        setAccountDetails((preValue) => ({
-          ...preValue,
-          name: data.organization.name || '',
-          nEvents: data.organization.numberOfEvents || 0,
-          nMembers: data.organization.numberOfMembers || 0,
-        }));
-      } else {
-        showAlert({
-          title: 'Error',
-          description: data.error,
-          status: 'error',
-        });
-      }
+     
     }
     // };
     // fetchOrganizationStats();

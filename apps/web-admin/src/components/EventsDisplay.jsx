@@ -31,16 +31,21 @@ const EventsDisplay = () => {
   useEffect(() => {
     if (orgId) {
       const fetchEvents = async () => {
-        const { data, status } = await get(`/core/organizations/${orgId}/events`);
-        if (status === 200) {
-          setEvents(data.events || []);
-        } else {
-          showAlert({
-            title: 'Error',
-            description: data.error,
-            status: 'error',
-          });
+        const expected = await get(`/core/organizations/${orgId}/events`);
+        if(expected){
+          const { data, status } = expected;
+          if (status === 200) {
+            setEvents(data.events || []);
+          } else {
+            showAlert({
+              title: 'Error',
+              description: data.error,
+              status: 'error',
+            });
+          }
         }
+       
+        
       };
       fetchEvents();
     }
