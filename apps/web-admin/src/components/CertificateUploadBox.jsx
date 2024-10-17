@@ -37,11 +37,11 @@ const KonvaText = dynamic(() => import('react-konva').then((mod) => mod.Text), {
 
 function CertifcateUploadBox() {
   const [position, setPosition] = useState({ x: 100, y: 100 });
-  const [position, setPosition] = useState({ x: 100, y: 100 });
+  //const [position, setPosition] = useState({ x: 100, y: 100 });
   const [imageSrc, setImageSrc] = useState(null);
   const [konvaImage, setKonvaImage] = useState(null);
   const [state, setState] = useState(false);
-  const [state, setState] = useState(false);
+  //const [state, setState] = useState(false);
   const fileInputRef = useRef(null);
   const stageRef = useRef(null);
   const parentRef = useRef(null);
@@ -285,14 +285,7 @@ function CertifcateUploadBox() {
                         onClick={() => {
                           handleEditClick(textObj);
                         }}
-                        onDragMove={(e) => {
-                          textObj.x = e.target.position().x;
-                          textObj.y = e.target.position().y;
-                          //console.log(textObj.id,e.target.position().x,e.target.position().y)
-                        }}
-                        onClick={() => {
-                          handleEditClick(textObj);
-                        }}
+                        
                       />
                     ))}
                   </Layer>
@@ -352,7 +345,7 @@ function CertifcateUploadBox() {
               ))}
             </VStack>
           )*/}
-          )*/}
+          
         </VStack>
       )}
 
