@@ -37,7 +37,8 @@ export const ProtectedRoute = ({ children }) => {
     if(expected){
       const { data, mystatus } = expected;
        console.log('created');
-       console.log("status");
+       //console.log("status");
+       console.log("data");
     if (mystatus === 200) {
       showAlert({
         title: 'Success',
