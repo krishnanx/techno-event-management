@@ -36,9 +36,9 @@ export const ProtectedRoute = ({ children }) => {
     const expected = await post(`/core/organizations`, {}, { id, name });
     if(expected){
       const { data, mystatus } = expected;
-       console.log('created');
+       //console.log('created');
        //console.log("status");
-       console.log("data");
+       //console.log("data");
     if (mystatus === 200) {
       showAlert({
         title: 'Success',
